@@ -1,33 +1,36 @@
 /**
- * AudioWorkletProcessor for pitch detection.
- * McLeod Pitch Method (MPM) — tuned for speech, not singing.
+ * AudioWorkletProcessor — McLeod Pitch Method for speech.
  *
- * Key design choices:
- *  - CLARITY_THRESHOLD 0.65  — speech rarely exceeds 0.75; sustained vowels hit 0.85+
- *  - No octave-doubling "correction" — that logic reliably maps F3 → C4 for speech
- *  - Median filter over 3 frames (not 5) — less latency, still smooths glitches
- *  - _lastHz reset to 0 on silence so stale state never contaminates next phrase
+ * The correct MPM algorithm:
+ *   1. Compute the NSDF (normalised square difference function).
+ *   2. Find ALL local maxima above the threshold.
+ *   3. Among those, pick the one at the LARGEST lag (= lowest frequency).
+ *      This is the fundamental. Higher-frequency peaks are harmonics.
+ *   4. Parabolic interpolation for sub-sample accuracy.
+ *   5. Short median filter to remove single-frame glitches.
+ *
+ * Threshold 0.65 — appropriate for speech (not singing).
+ * Range 70–400 Hz — covers C2 to G4, the full feminisation practice range.
  */
 
-const SAMPLE_RATE = 48000;
-const WINDOW_SIZE = 2048;
-const HOP_SIZE = 512;
-const CLARITY_THRESHOLD = 0.65;
-const MIN_HZ = 70;
-const MAX_HZ = 700;
+const SAMPLE_RATE     = 48000;
+const WINDOW_SIZE     = 4096;   // larger window → better low-frequency resolution
+const HOP_SIZE        = 512;
+const CLARITY_THRESH  = 0.65;
+const MIN_HZ          = 70;     // ~C2
+const MAX_HZ          = 400;    // ~G4 — voices don't go above this in practice
 
 class PitchProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
-    this._buffer  = new Float32Array(WINDOW_SIZE);
-    this._bufIdx  = 0;
-    this._hopCtr  = 0;
-    this._lastHz  = 0;
-    // Median filter — 3 slots, initialised to -1 (empty sentinel)
-    this._mBuf    = [-1, -1, -1];
-    this._mIdx    = 0;
-    this._mCount  = 0;
-    this._active  = true;
+    this._buf    = new Float32Array(WINDOW_SIZE);
+    this._bufIdx = 0;
+    this._hop    = 0;
+    // 3-slot median filter
+    this._med    = new Float32Array(3);
+    this._mIdx   = 0;
+    this._mFill  = 0;
+    this._active = true;
 
     this.port.onmessage = (e) => {
       if (e.data === "stop")  this._active = false;
@@ -40,101 +43,119 @@ class PitchProcessor extends AudioWorkletProcessor {
     if (!ch || !this._active) return true;
 
     for (let i = 0; i < ch.length; i++) {
-      this._buffer[this._bufIdx % WINDOW_SIZE] = ch[i];
+      this._buf[this._bufIdx % WINDOW_SIZE] = ch[i];
       this._bufIdx++;
-      this._hopCtr++;
-
-      if (this._hopCtr >= HOP_SIZE) {
-        this._hopCtr = 0;
+      if (++this._hop >= HOP_SIZE) {
+        this._hop = 0;
         this.port.postMessage(this._detect());
       }
     }
     return true;
   }
 
-  // ─── Core MPM ──────────────────────────────────────────────────────────────
-
   _detect() {
-    // Copy ring buffer into a linear frame
+    // Linearise ring buffer
     const frame = new Float32Array(WINDOW_SIZE);
     const start = this._bufIdx % WINDOW_SIZE;
-    for (let i = 0; i < WINDOW_SIZE; i++) {
-      frame[i] = this._buffer[(start + i) % WINDOW_SIZE];
-    }
+    for (let i = 0; i < WINDOW_SIZE; i++)
+      frame[i] = this._buf[(start + i) % WINDOW_SIZE];
 
-    // Energy gate — skip silent frames cheaply
+    // Energy gate
     let energy = 0;
     for (let i = 0; i < WINDOW_SIZE; i++) energy += frame[i] * frame[i];
     if (energy / WINDOW_SIZE < 1e-7) {
-      this._lastHz = 0;
-      this._mBuf = [-1, -1, -1]; this._mIdx = 0; this._mCount = 0;
+      this._resetMedian();
       return { hz: 0, clarity: 0 };
     }
 
-    // Normalised Square Difference Function (NSDF)
-    const nsdf = new Float32Array(WINDOW_SIZE);
-    for (let tau = 0; tau < WINDOW_SIZE; tau++) {
+    // NSDF — O(N²) but N=4096 runs fine in a worklet
+    const minLag = Math.floor(SAMPLE_RATE / MAX_HZ); //  120 @ 48k, 400 Hz
+    const maxLag = Math.floor(SAMPLE_RATE / MIN_HZ); //  686 @ 48k,  70 Hz
+    const nsdf   = new Float32Array(maxLag + 1);
+
+    for (let tau = minLag; tau <= maxLag; tau++) {
       let acf = 0, m = 0;
-      const len = WINDOW_SIZE - tau;
-      for (let i = 0; i < len; i++) {
+      const n = WINDOW_SIZE - tau;
+      for (let i = 0; i < n; i++) {
         acf += frame[i] * frame[i + tau];
         m   += frame[i] * frame[i] + frame[i + tau] * frame[i + tau];
       }
       nsdf[tau] = m < 1e-10 ? 0 : (2 * acf) / m;
     }
 
-    // Find the BEST peak above threshold in the valid lag range
-    // "Best" = highest NSDF value, not first — more robust for speech
-    const minPeriod = Math.floor(SAMPLE_RATE / MAX_HZ); // ~69 samples for 700 Hz
-    const maxPeriod = Math.floor(SAMPLE_RATE / MIN_HZ); // ~686 samples for 70 Hz
+    // ── Collect ALL peaks above threshold ────────────────────────────────────
+    // A peak is a local maximum where nsdf[tau] >= CLARITY_THRESH.
+    // We scan for sign changes (negative→positive→negative) in the NSDF.
+    const peaks = []; // { tau, val }
 
-    let bestVal    = -Infinity;
-    let bestPeriod = -1;
-    let inPositive = false;
+    let prevSign  = Math.sign(nsdf[minLag]);
+    let localMax  = -Infinity;
+    let localTau  = -1;
 
-    for (let tau = minPeriod; tau < maxPeriod && tau < WINDOW_SIZE; tau++) {
-      if (!inPositive && nsdf[tau] > 0) inPositive = true;
+    for (let tau = minLag + 1; tau <= maxLag; tau++) {
+      const v    = nsdf[tau];
+      const sign = Math.sign(v);
 
-      if (inPositive) {
-        if (nsdf[tau] > bestVal) {
-          bestVal    = nsdf[tau];
-          bestPeriod = tau;
-        }
-        // Once we fall back below zero after finding a candidate, stop.
-        // This keeps us in the first positive lobe (= fundamental), not harmonics.
-        if (nsdf[tau] < 0 && bestPeriod >= 0) break;
+      if (sign > 0 && prevSign <= 0) {
+        // Rising zero-crossing — start of a new positive lobe
+        localMax = v;
+        localTau = tau;
+      } else if (sign > 0) {
+        if (v > localMax) { localMax = v; localTau = tau; }
+      } else if (sign <= 0 && prevSign > 0) {
+        // Falling zero-crossing — end of lobe; record if above threshold
+        if (localMax >= CLARITY_THRESH && localTau >= 0)
+          peaks.push({ tau: localTau, val: localMax });
+        localMax = -Infinity;
+        localTau = -1;
       }
+      prevSign = sign;
+    }
+    // Catch any lobe that extends to maxLag without a final zero crossing
+    if (localMax >= CLARITY_THRESH && localTau >= 0)
+      peaks.push({ tau: localTau, val: localMax });
+
+    if (peaks.length === 0) {
+      this._resetMedian();
+      return { hz: 0, clarity: 0 };
     }
 
-    if (bestPeriod < 0 || bestVal < CLARITY_THRESHOLD) {
-      this._lastHz = 0;
-      this._mBuf = [-1, -1, -1]; this._mIdx = 0; this._mCount = 0;
-      return { hz: 0, clarity: bestVal > 0 ? bestVal : 0 };
+    // ── Pick the peak at the LARGEST lag = lowest frequency = fundamental ────
+    // Among all qualifying peaks, the one with the highest lag is the
+    // fundamental period. Shorter lags are harmonics (integer sub-multiples).
+    let best = peaks[0];
+    for (const p of peaks) {
+      if (p.tau > best.tau) best = p;
     }
 
-    // Parabolic interpolation for sub-sample accuracy
-    const y0 = nsdf[Math.max(0, bestPeriod - 1)];
-    const y1 = nsdf[bestPeriod];
-    const y2 = nsdf[Math.min(WINDOW_SIZE - 1, bestPeriod + 1)];
-    const denom = 2 * (2 * y1 - y0 - y2);
-    const offset = denom !== 0 ? (y0 - y2) / denom : 0;
-    const hz = SAMPLE_RATE / (bestPeriod + offset);
+    // Parabolic interpolation
+    const { tau: t, val: clarity } = best;
+    const y0 = nsdf[Math.max(minLag,    t - 1)];
+    const y1 = nsdf[t];
+    const y2 = nsdf[Math.min(maxLag, t + 1)];
+    const d  = 2 * (2 * y1 - y0 - y2);
+    const dt = d !== 0 ? (y0 - y2) / d : 0;
+    const hz = SAMPLE_RATE / (t + dt);
 
-    // Sanity-check range (parabolic offset can occasionally go wild)
     if (hz < MIN_HZ || hz > MAX_HZ) {
-      this._lastHz = 0;
-      return { hz: 0, clarity: bestVal };
+      this._resetMedian();
+      return { hz: 0, clarity };
     }
 
-    // 3-frame median filter — smooths single-frame glitches without adding latency
-    this._mBuf[this._mIdx % 3] = hz;
+    // Median filter
+    this._med[this._mIdx % 3] = hz;
     this._mIdx++;
-    this._mCount = Math.min(this._mCount + 1, 3);
-    const filled = this._mBuf.filter((v) => v >= 0).sort((a, b) => a - b);
+    this._mFill = Math.min(this._mFill + 1, 3);
+    const filled = Array.from(this._med.subarray(0, this._mFill)).sort((a, b) => a - b);
     const median = filled[Math.floor(filled.length / 2)];
 
-    this._lastHz = median;
-    return { hz: median, clarity: bestVal };
+    return { hz: median, clarity };
+  }
+
+  _resetMedian() {
+    this._med.fill(0);
+    this._mIdx  = 0;
+    this._mFill = 0;
   }
 }
 
