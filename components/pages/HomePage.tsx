@@ -22,7 +22,6 @@ export default function HomePage() {
   }, []);
 
   const lastTech = techniques.find((t) => t.id === lastTechId);
-
   const greeting = getGreeting();
 
   return (
@@ -45,24 +44,24 @@ export default function HomePage() {
         </div>
         <div>
           <p className="font-bold text-navy text-base">Open Pitch Reader</p>
-          <p className="text-xs text-navy/70">Live pitch tracking · tap a note to hear it</p>
+          <p className="text-sm text-navy/70">Live pitch tracking · tap a note to hear it</p>
         </div>
-        <ChevronIcon className="ml-auto w-5 h-5 text-navy/50" />
+        <ChevronIcon className="ml-auto w-5 h-5 text-navy/60" />
       </Link>
 
       {/* Today's warm-up preview */}
       <section>
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-semibold text-navy dark:text-white">Today's warm-up</h2>
-          <Link href="/warmups" className="text-sm text-flag-blue font-medium">See all</Link>
+          <Link href="/warmups" className="text-sm text-flag-blue font-semibold">See all</Link>
         </div>
         <div className="bg-tint-blue rounded-2xl p-4 space-y-2">
           {previewItems.length === 0 ? (
-            <p className="text-sm text-gray-500 italic">Loading…</p>
+            <p className="text-sm text-navy/50 italic">Loading…</p>
           ) : (
             previewItems.map((item) => (
-              <div key={item.id} className="flex items-center gap-2 text-sm text-navy dark:text-white">
-                <span className="w-1.5 h-1.5 rounded-full bg-flag-blue flex-shrink-0" aria-hidden="true" />
+              <div key={item.id} className="flex items-center gap-2 text-sm text-navy font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-navy/40 flex-shrink-0" aria-hidden="true" />
                 {item.title}
               </div>
             ))
@@ -84,14 +83,14 @@ export default function HomePage() {
             href={`/techniques/${lastTech.id}`}
             className="flex items-center gap-4 bg-tint-pink rounded-2xl p-4 touch-target"
           >
-            <div className="w-10 h-10 bg-flag-pink/30 rounded-xl flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 bg-flag-pink/40 rounded-xl flex items-center justify-center flex-shrink-0">
               <MicIcon className="w-5 h-5 text-navy" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-navy dark:text-white text-sm truncate">{lastTech.title}</p>
-              <p className="text-xs text-gray-500 truncate">{lastTech.summary}</p>
+              <p className="font-semibold text-navy text-sm truncate">{lastTech.title}</p>
+              <p className="text-sm text-navy/60 truncate mt-0.5">{lastTech.summary}</p>
             </div>
-            <ChevronIcon className="w-5 h-5 text-gray-400" />
+            <ChevronIcon className="w-5 h-5 text-navy/40" />
           </Link>
         </section>
       )}
@@ -100,24 +99,24 @@ export default function HomePage() {
       <section>
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-semibold text-navy dark:text-white">Techniques</h2>
-          <Link href="/techniques" className="text-sm text-flag-blue font-medium">All 10</Link>
+          <Link href="/techniques" className="text-sm text-flag-blue font-semibold">All 10</Link>
         </div>
         <div className="grid grid-cols-2 gap-2">
           {techniques.slice(0, 4).map((t) => (
             <Link
               key={t.id}
               href={`/techniques/${t.id}`}
-              className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 touch-target"
+              className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 touch-target"
             >
               <p className="font-semibold text-navy dark:text-white text-sm leading-tight">{t.title}</p>
-              <p className="text-xs text-gray-400 mt-1 leading-snug line-clamp-2">{t.summary}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-snug line-clamp-2">{t.summary}</p>
             </Link>
           ))}
         </div>
       </section>
 
       {/* Safety reminder */}
-      <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-xs text-gray-500 dark:text-gray-400 text-center">
+      <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-3 text-sm text-gray-600 dark:text-gray-300 text-center">
         Stop if anything hurts or feels strained. Training should feel comfortable.
       </div>
     </div>

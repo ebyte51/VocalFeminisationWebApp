@@ -107,7 +107,7 @@ export default function TechniquePage({ id }: { id: string }) {
       )}
 
       {/* Stop reminder */}
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-xl p-3 mb-6 text-xs text-amber-800 dark:text-amber-200">
+      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3 mb-6 text-sm text-amber-900 dark:text-amber-200 font-medium">
         Stop if anything hurts or feels strained. Training should feel comfortable.
       </div>
 
@@ -117,7 +117,7 @@ export default function TechniquePage({ id }: { id: string }) {
         <ol className="space-y-3">
           {tech.steps.map((step, i) => (
             <li key={i} className="flex gap-3">
-              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-flag-pink/20 text-navy font-semibold text-xs flex items-center justify-center mt-0.5">
+              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-flag-pink/30 text-navy font-semibold text-xs flex items-center justify-center mt-0.5">
                 {i + 1}
               </span>
               <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">{step}</p>
@@ -129,7 +129,7 @@ export default function TechniquePage({ id }: { id: string }) {
       {/* Why it works */}
       <section className="mb-6">
         <h2 className="font-semibold text-navy dark:text-white mb-3">Why it works</h2>
-        <div className="bg-tint-blue rounded-2xl p-4 text-sm text-navy/80 dark:text-blue-100 leading-relaxed">
+        <div className="bg-tint-blue rounded-2xl p-4 text-sm text-navy leading-relaxed">
           {tech.why}
         </div>
       </section>

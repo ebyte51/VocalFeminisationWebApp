@@ -22,8 +22,8 @@ export default function FoundationsPage() {
             <div key={item.title} className="flex gap-3 items-start bg-tint-blue rounded-xl p-4">
               <span className="text-xl" aria-hidden="true">{item.icon}</span>
               <div>
-                <p className="font-semibold text-navy dark:text-white text-sm">{item.title}</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mt-0.5">{item.text}</p>
+                <p className="font-semibold text-navy text-sm">{item.title}</p>
+                <p className="text-sm text-navy/70 mt-0.5 leading-relaxed">{item.text}</p>
               </div>
             </div>
           ))}
@@ -35,27 +35,27 @@ export default function FoundationsPage() {
         <h2 className="font-semibold text-navy dark:text-white mb-3">Core concepts</h2>
 
         <div className="bg-tint-pink rounded-2xl p-4 mb-3">
-          <p className="font-semibold text-navy dark:text-white text-sm mb-1">The goal</p>
-          <p className="text-xs text-gray-700 dark:text-gray-200 leading-relaxed">
+          <p className="font-semibold text-navy text-sm mb-1">The goal</p>
+          <p className="text-sm text-navy/70 leading-relaxed">
             Vocal feminisation works by stretching and thinning the vocal folds. This raises pitch and changes the quality of the voice. It takes time and consistent practice.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-4 mb-3">
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 mb-3">
           <p className="font-semibold text-navy dark:text-white text-sm mb-3">Three ingredients of voice</p>
           <div className="grid grid-cols-3 gap-2 text-center">
             {[
-              { label: "Power", sub: "Breath", techniques: "Breath support" },
-              { label: "Source", sub: "Vocal folds", techniques: "Larynx height, Sirens" },
-              { label: "Filter", sub: "Resonance", techniques: "Key shape, Smiletone" },
+              { label: "Power", sub: "Breath" },
+              { label: "Source", sub: "Vocal folds" },
+              { label: "Filter", sub: "Resonance" },
             ].map((item) => (
               <div key={item.label} className="bg-tint-blue rounded-xl p-2">
-                <p className="font-bold text-navy dark:text-white text-sm">{item.label}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{item.sub}</p>
+                <p className="font-bold text-navy text-sm">{item.label}</p>
+                <p className="text-sm text-navy/60">{item.sub}</p>
               </div>
             ))}
           </div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">
             Techniques address each ingredient — often more than one at once.
           </p>
         </div>
@@ -78,11 +78,11 @@ export default function FoundationsPage() {
               text: "E3 (164.8 Hz), F3 (174.6 Hz) and G3 (196 Hz) are common example targets. These are starting points, not absolutes — voices vary, and what matters is how yours feels and sounds to you.",
             },
           ].map((item) => (
-            <div key={item.title} className="flex gap-3 items-start bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-              <span className="text-xl" aria-hidden="true">{item.icon}</span>
+            <div key={item.title} className="flex gap-3 items-start bg-gray-100 dark:bg-gray-800 rounded-xl p-4">
+              <span className="text-xl flex-shrink-0" aria-hidden="true">{item.icon}</span>
               <div>
                 <p className="font-semibold text-navy dark:text-white text-sm">{item.title}</p>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">{item.text}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">{item.text}</p>
               </div>
             </div>
           ))}

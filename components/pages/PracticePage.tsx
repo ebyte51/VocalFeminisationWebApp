@@ -96,15 +96,15 @@ export default function PracticePage() {
 
       {/* 10-30 second rule */}
       <section className="bg-tint-blue rounded-2xl p-5">
-        <h2 className="font-semibold text-navy dark:text-white mb-1">The 10-30 second rule</h2>
-        <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">
-          For the first 10–30 seconds of a conversation, focus on <strong>one</strong> specific aspect.
+        <h2 className="font-semibold text-navy mb-1">The 10-30 second rule</h2>
+        <p className="text-sm text-navy/70 mb-3">
+          For the first 10–30 seconds of a conversation, focus on <strong className="text-navy">one</strong> specific aspect.
           Focus on <em>how</em> you speak, not what you say. When it feels easy, extend to 1–2 minutes.
         </p>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-3 mb-3">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Today's focus</p>
-          <p className="text-sm font-medium text-navy dark:text-white">{todayAspect}</p>
+        <div className="bg-white rounded-xl p-3 mb-3">
+          <p className="text-xs text-gray-500 mb-1">Today's focus</p>
+          <p className="text-sm font-semibold text-navy">{todayAspect}</p>
         </div>
 
         {/* Timer */}

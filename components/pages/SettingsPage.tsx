@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useSettingsStore } from "@/lib/store";
 import { deleteAllRecordings } from "@/lib/db";
+import Toggle from "@/components/Toggle";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -31,27 +32,28 @@ export default function SettingsPage() {
         <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
           Pitch Reader
         </h2>
-        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
-          <ToggleRow
-            label="Highlight example pitches"
-            description="Shades E3–G3 in the graph as a visual reference"
-            value={settings.highlightExamplePitches}
-            onChange={(v) => {
-              setSettings({
-                highlightExamplePitches: v,
-                targetRange: {
-                  ...settings.targetRange,
-                  mode: v ? "example" : "off",
-                },
-              });
-            }}
-          />
-          <ToggleRow
-            label="Reference tones"
-            description="Allow playing tones by tapping the note ruler"
-            value={settings.referenceTones}
-            onChange={(v) => handleToggle("referenceTones", v)}
-          />
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
+          <div className="p-4">
+            <Toggle
+              label="Highlight example pitches"
+              description="Shades E3–G3 in the graph as a visual reference"
+              checked={settings.highlightExamplePitches}
+              onChange={(v) =>
+                setSettings({
+                  highlightExamplePitches: v,
+                  targetRange: { ...settings.targetRange, mode: v ? "example" : "off" },
+                })
+              }
+            />
+          </div>
+          <div className="p-4">
+            <Toggle
+              label="Reference tones"
+              description="Allow playing tones by tapping the note ruler"
+              checked={settings.referenceTones}
+              onChange={(v) => handleToggle("referenceTones", v)}
+            />
+          </div>
           <SelectRow
             label="Default window"
             description="How much time the graph shows"
@@ -71,13 +73,15 @@ export default function SettingsPage() {
         <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
           Rest reminder
         </h2>
-        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
-          <ToggleRow
-            label="Show rest reminders"
-            description="A banner after active practice time — supports safe training"
-            value={settings.reminderEnabled}
-            onChange={(v) => handleToggle("reminderEnabled", v)}
-          />
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
+          <div className="p-4">
+            <Toggle
+              label="Show rest reminders"
+              description="A banner after active practice time — supports safe training"
+              checked={settings.reminderEnabled}
+              onChange={(v) => handleToggle("reminderEnabled", v)}
+            />
+          </div>
           <SelectRow
             label="Reminder interval"
             description="How often the reminder appears"
@@ -100,7 +104,7 @@ export default function SettingsPage() {
         <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
           Appearance
         </h2>
-        <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl divide-y divide-gray-100 dark:divide-gray-700">
           <SelectRow
             label="Colour scheme"
             value={settings.appearance}
@@ -111,16 +115,18 @@ export default function SettingsPage() {
             ]}
             onChange={(v) => setSettings({ appearance: v as "light" | "dark" | "system" })}
           />
-          <ToggleRow
-            label="Reduced motion"
-            description="Slows or pauses graph animations"
-            value={settings.reducedMotion}
-            onChange={(v) => handleToggle("reducedMotion", v)}
-          />
+          <div className="p-4">
+            <Toggle
+              label="Reduced motion"
+              description="Slows or pauses graph animations"
+              checked={settings.reducedMotion}
+              onChange={(v) => handleToggle("reducedMotion", v)}
+            />
+          </div>
         </div>
       </section>
 
-      {/* Account & data */}
+      {/* Data */}
       <section>
         <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-3">
           Data
@@ -128,13 +134,13 @@ export default function SettingsPage() {
         <div className="space-y-2">
           <button
             onClick={handleReplayWelcome}
-            className="w-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl px-4 py-3 text-left text-sm text-navy dark:text-white touch-target"
+            className="w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-left text-sm text-navy dark:text-white touch-target"
           >
             Replay welcome screens
           </button>
           <button
             onClick={handleDeleteAll}
-            className="w-full bg-white dark:bg-gray-800 border border-red-100 dark:border-red-800 rounded-xl px-4 py-3 text-left text-sm text-red-600 dark:text-red-400 touch-target"
+            className="w-full bg-white dark:bg-gray-800 border border-red-200 dark:border-red-800 rounded-xl px-4 py-3 text-left text-sm text-red-600 dark:text-red-400 touch-target"
           >
             Delete all recordings
           </button>
@@ -145,44 +151,6 @@ export default function SettingsPage() {
         All data is stored on your device. Nothing is uploaded.
       </p>
     </div>
-  );
-}
-
-function ToggleRow({
-  label,
-  description,
-  value,
-  onChange,
-}: {
-  label: string;
-  description?: string;
-  value: boolean;
-  onChange: (v: boolean) => void;
-}) {
-  return (
-    <label className="flex items-start gap-3 p-4 cursor-pointer">
-      <div className="flex-1">
-        <p className="text-sm font-medium text-navy dark:text-white">{label}</p>
-        {description && (
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{description}</p>
-        )}
-      </div>
-      <button
-        role="switch"
-        aria-checked={value}
-        onClick={() => onChange(!value)}
-        className={`relative flex-shrink-0 w-12 h-7 rounded-full transition-colors ${
-          value ? "bg-flag-blue" : "bg-gray-200 dark:bg-gray-600"
-        }`}
-      >
-        <span
-          className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-            value ? "translate-x-6" : "translate-x-1"
-          }`}
-        />
-        <span className="sr-only">{value ? "On" : "Off"}</span>
-      </button>
-    </label>
   );
 }
 
@@ -200,7 +168,7 @@ function SelectRow({
   onChange: (v: string) => void;
 }) {
   return (
-    <div className="flex items-start gap-3 p-4">
+    <div className="flex items-center gap-3 p-4">
       <div className="flex-1">
         <p className="text-sm font-medium text-navy dark:text-white">{label}</p>
         {description && (
@@ -210,7 +178,7 @@ function SelectRow({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="text-sm bg-gray-100 dark:bg-gray-700 text-navy dark:text-white rounded-lg px-2 py-1.5 touch-target border-none focus:outline-none"
+        className="text-sm bg-gray-100 dark:bg-gray-700 text-navy dark:text-white rounded-lg px-2 py-1.5 border-none focus:outline-none focus:ring-2 focus:ring-flag-blue"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>{o.label}</option>

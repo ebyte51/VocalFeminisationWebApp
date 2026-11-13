@@ -10,11 +10,9 @@ export default function WarmupsPage() {
   const [routine, setRoutine] = useState<WarmupItem[]>([]);
   const [cooldown, setCooldown] = useState<WarmupItem[]>([]);
   const [checked, setChecked] = useState<Set<string>>(new Set());
-  const [shuffleCount, setShuffleCount] = useState(0);
 
   useEffect(() => {
     const sc = getShuffleCounter();
-    setShuffleCount(sc);
     const { routine: r, cooldown: c } = buildRoutine(allWarmups, sc);
     setRoutine(r);
     setCooldown(c);
@@ -22,7 +20,6 @@ export default function WarmupsPage() {
 
   function shuffle() {
     const next = incrementShuffle();
-    setShuffleCount(next);
     const { routine: r, cooldown: c } = buildRoutine(allWarmups, next);
     setRoutine(r);
     setCooldown(c);
@@ -43,63 +40,44 @@ export default function WarmupsPage() {
         <h1 className="text-2xl font-bold text-navy dark:text-white">Warm-ups</h1>
         <button
           onClick={shuffle}
-          className="flex items-center gap-1 text-sm text-flag-blue font-medium touch-target px-2"
+          className="flex items-center gap-1.5 text-sm text-flag-blue font-semibold touch-target px-2"
           aria-label="Shuffle warm-up routine"
         >
           <ShuffleIcon className="w-4 h-4" />
           Shuffle
         </button>
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-5">
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-5">
         Do the warm-ups consistently. Stop if anything hurts.
       </p>
 
       <div className="space-y-3">
         {routine.map((item) => (
-          <WarmupCard
-            key={item.id}
-            item={item}
-            checked={checked.has(item.id)}
-            onToggle={() => toggle(item.id)}
-          />
+          <WarmupCard key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
         ))}
       </div>
 
       {/* Cooldown */}
       <div className="mt-8">
         <h2 className="text-lg font-semibold text-navy dark:text-white mb-1">Cooldown</h2>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
           As always, warm down. A few minutes to settle the voice.
         </p>
         <div className="space-y-3">
           {cooldown.map((item) => (
-            <WarmupCard
-              key={item.id}
-              item={item}
-              checked={checked.has(item.id)}
-              onToggle={() => toggle(item.id)}
-            />
+            <WarmupCard key={item.id} item={item} checked={checked.has(item.id)} onToggle={() => toggle(item.id)} />
           ))}
         </div>
       </div>
 
-      <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-3 text-xs text-gray-500 dark:text-gray-400 text-center">
+      <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-xl p-3 text-sm text-gray-600 dark:text-gray-300 text-center">
         Stop if anything hurts, feels strained, or leaves your voice hoarse.
       </div>
     </div>
   );
 }
 
-function WarmupCard({
-  item,
-  checked,
-  onToggle,
-}: {
-  item: WarmupItem;
-  checked: boolean;
-  onToggle: () => void;
-}) {
-  const [expanded, setExpanded] = useState(false);
+function WarmupCard({ item, checked, onToggle }: { item: WarmupItem; checked: boolean; onToggle: () => void }) {
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [running, setRunning] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -130,17 +108,17 @@ function WarmupCard({
     <div
       className={`rounded-2xl border transition-opacity ${
         checked
-          ? "bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-gray-700 opacity-60"
-          : "bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-700"
+          ? "bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 opacity-50"
+          : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700"
       }`}
     >
       <div className="flex items-start gap-3 p-4">
         {/* Checkbox */}
         <button
           onClick={onToggle}
-          className="mt-0.5 w-6 h-6 rounded-lg border-2 flex-shrink-0 flex items-center justify-center touch-target"
+          className="mt-0.5 w-6 h-6 rounded-lg border-2 flex-shrink-0 flex items-center justify-center"
           style={{
-            borderColor: checked ? "#F5A9B8" : "#d1d5db",
+            borderColor: checked ? "#F5A9B8" : "#9ca3af",
             backgroundColor: checked ? "#F5A9B8" : "transparent",
           }}
           aria-label={checked ? `Unmark ${item.title} as done` : `Mark ${item.title} as done`}
@@ -154,23 +132,25 @@ function WarmupCard({
         </button>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <p className={`font-semibold text-sm ${checked ? "line-through text-gray-400" : "text-navy dark:text-white"}`}>
               {item.title}
             </p>
             {(item.timerSeconds || item.reps) && (
-              <span className="text-xs text-gray-400 ml-2">
-                {item.timerSeconds ? `${item.timerSeconds}s` : ""}{item.timerSeconds && item.reps ? " × " : ""}{item.reps ? `×${item.reps}` : ""}
+              <span className="text-xs text-gray-500 dark:text-gray-400 flex-shrink-0">
+                {item.timerSeconds ? `${item.timerSeconds}s` : ""}
+                {item.timerSeconds && item.reps ? " × " : ""}
+                {item.reps ? `×${item.reps}` : ""}
               </span>
             )}
           </div>
 
-          <p className="text-xs text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 leading-relaxed">
             {item.instructions}
           </p>
 
           {item.tip && (
-            <div className="mt-2 bg-tint-blue rounded-lg px-3 py-2 text-xs text-navy/70 dark:text-blue-200">
+            <div className="mt-2 bg-tint-blue rounded-lg px-3 py-2 text-sm text-navy">
               💡 {item.tip}
             </div>
           )}
@@ -179,7 +159,7 @@ function WarmupCard({
           {item.timerSeconds && (
             <div className="mt-2 flex items-center gap-2">
               {running ? (
-                <div className="flex items-center gap-2 text-sm font-mono text-flag-blue">
+                <div className="flex items-center gap-2 text-sm font-mono text-navy font-semibold">
                   <span>{timeLeft}s</span>
                   <div className="w-20 h-1.5 bg-gray-200 rounded-full overflow-hidden">
                     <div
@@ -191,7 +171,7 @@ function WarmupCard({
               ) : (
                 <button
                   onClick={startTimer}
-                  className="text-xs text-flag-blue font-medium touch-target"
+                  className="text-sm text-flag-blue font-semibold touch-target"
                 >
                   ⏱ Start {item.timerSeconds}s timer
                 </button>

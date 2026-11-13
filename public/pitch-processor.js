@@ -7,7 +7,7 @@
 const SAMPLE_RATE = 48000;
 const WINDOW_SIZE = 2048;
 const HOP_SIZE = 512;
-const CLARITY_THRESHOLD = 0.9;
+const CLARITY_THRESHOLD = 0.75;
 const MIN_HZ = 70;
 const MAX_HZ = 700;
 
@@ -18,8 +18,9 @@ class PitchProcessor extends AudioWorkletProcessor {
     this._bufferIdx = 0;
     this._hopCounter = 0;
     this._lastHz = 0;
-    this._medianBuf = [0, 0, 0, 0, 0];
+    this._medianBuf = [-1, -1, -1, -1, -1];
     this._medianIdx = 0;
+    this._medianCount = 0;
     this._active = true;
 
     this.port.onmessage = (e) => {
@@ -87,6 +88,7 @@ class PitchProcessor extends AudioWorkletProcessor {
     }
 
     if (period < 0 || maxVal < CLARITY_THRESHOLD) {
+      this._lastHz = 0; // reset continuity on silence
       return { hz: 0, clarity: maxVal > 0 ? maxVal : 0 };
     }
 
@@ -109,11 +111,13 @@ class PitchProcessor extends AudioWorkletProcessor {
       if (d2 < d1 && octaveHz < MAX_HZ) finalHz = octaveHz;
     }
 
-    // Median filter over last 5 frames
+    // Median filter over last 5 frames — only use populated slots
     this._medianBuf[this._medianIdx % 5] = finalHz;
     this._medianIdx++;
-    const sorted = [...this._medianBuf].sort((a, b) => a - b);
-    const median = sorted[2];
+    this._medianCount = Math.min(this._medianCount + 1, 5);
+    const filled = this._medianBuf.filter((v) => v >= 0);
+    const sorted = [...filled].sort((a, b) => a - b);
+    const median = sorted[Math.floor(sorted.length / 2)];
 
     this._lastHz = median;
     return { hz: median, clarity: maxVal };
