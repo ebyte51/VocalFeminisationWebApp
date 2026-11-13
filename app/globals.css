@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --flag-blue: #5BCEFA;
+  --flag-pink: #F5A9B8;
+  --tint-blue: #E8F8FE;
+  --tint-pink: #FDEEF2;
+  --navy: #1c2541;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent overscroll bounce on iOS */
+body {
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Safe area padding for notched phones */
+.safe-pb {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.safe-pt {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Touch targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Flag stripe header */
+.flag-stripe {
+  height: 5px;
+  background: linear-gradient(
+    to right,
+    var(--flag-blue) 0%,
+    var(--flag-blue) 20%,
+    var(--flag-pink) 20%,
+    var(--flag-pink) 40%,
+    white 40%,
+    white 60%,
+    var(--flag-pink) 60%,
+    var(--flag-pink) 80%,
+    var(--flag-blue) 80%,
+    var(--flag-blue) 100%
+  );
+}
+
+/* Pitch graph canvas */
+canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* Smooth checkboxes */
+.checkbox-pink {
+  accent-color: var(--flag-pink);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Dark mode base */
+.dark {
+  color-scheme: dark;
+}
+.dark body {
+  background-color: var(--navy);
+  color: #f0f4ff;
+}

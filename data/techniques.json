@@ -1,0 +1,262 @@
+[
+  {
+    "id": "breath-support",
+    "title": "Breath support",
+    "summary": "Use belly breathing, controlled from the abdomen, so the vocal folds are supported.",
+    "steps": [
+      "Take a deep breath, filling from the abdomen upward.",
+      "Sustain 'shhh' (quietening someone) on a slow exhale — control the flow from the belly.",
+      "Repeat with 'vrrr' (a racing car) and 'brrr' (a bumble bee).",
+      "Foghorn progression: deep diaphragmatic breath, purse lips into an 'o', sustain a foghorn-like 'ooo'.",
+      "Then a breathier 'ooo'; then push from the diaphragm for a louder 'ooo'.",
+      "When you notice you're speaking more quietly, check your air support and diaphragmatic breathing."
+    ],
+    "why": "The three ingredients of voice are power (breath), source (vocal folds) and filter (resonance). Remaining with belly breathing rather than short breaths supports the vocal folds and gives you control. When you speak more quietly, check air support first.",
+    "phrases": [
+      "Count from 1 to 10 on a single breath",
+      "Hi, how are you?"
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 20,
+      "mode": "free"
+    },
+    "related": ["pitch-targets", "ng-sirens"],
+    "source": 1
+  },
+  {
+    "id": "pitch-targets",
+    "title": "Pitch targets and holding pitch",
+    "summary": "Hum E3 and hold it, then keep E3 through extended vowels.",
+    "steps": [
+      "Find E3 (164.8 Hz) using the reference tone in the Pitch Reader.",
+      "Hum at E3 and try to hold it steadily — watch the line in the Pitch Reader.",
+      "Cycle through extended vowels (ee, ah, oh, oo) keeping your pitch at E3.",
+      "Notice the feedback in your body: how does holding pitch at E3 feel?",
+      "It's normal for pitch to fall at the end of speech — aim to maintain pitch while holding the vowel."
+    ],
+    "why": "Common targets for feminisation are E3 (164.8 Hz), F3 (174.6 Hz) and G3 (196 Hz). Pitch is only a small part of voice — resonance, intonation and air support matter too. These are example targets, not an absolute truth.",
+    "phrases": [
+      "Wow",
+      "Wow, thank you"
+    ],
+    "pitchPreset": {
+      "targets": ["E3"],
+      "window": 15,
+      "mode": "hum"
+    },
+    "related": ["breath-support", "larynx-height"],
+    "source": 1
+  },
+  {
+    "id": "larynx-height",
+    "title": "Larynx height",
+    "summary": "Feel your larynx move and try to keep it raised while speaking.",
+    "steps": [
+      "Place two fingers lightly on your throat to feel the larynx.",
+      "Make a high 'he-he' laugh — feel the larynx rise.",
+      "Make an excited, high gasp 'ahh' — feel it rise again.",
+      "Make a low groan, like an angry bear — feel it drop.",
+      "Use the gasp to go into 'wow', staying monotone, and notice the larynx staying raised.",
+      "Try 'wow, thank you' the same way — raised larynx throughout."
+    ],
+    "why": "The groan/gasp contrast gives you a physical reference for high and low larynx positions. Keeping the larynx raised is one part of a more feminine voice quality.",
+    "phrases": [
+      "Wow",
+      "Wow, thank you",
+      "Count 1 to 10 normally, then with a raised larynx — compare the pitch pattern"
+    ],
+    "pitchPreset": {
+      "targets": ["E3", "F3", "G3"],
+      "window": 20,
+      "mode": "free"
+    },
+    "related": ["pitch-targets", "resonance-key"],
+    "source": 2
+  },
+  {
+    "id": "intonation-curves",
+    "title": "Intonation and pitch curves",
+    "summary": "Practise the rise and fall of speech using a simple curve.",
+    "steps": [
+      "Say 'banana' as ba-na-na: start 'ba' at E3, rise on the first 'na', fall slightly on the second 'na'.",
+      "Use the same curve for 'hi-how-are-you?' — a gentle arc.",
+      "Count 1 to 10, noticing where pitch rises and falls naturally.",
+      "Repeat with a raised larynx and see whether the pitch pattern changes.",
+      "Move the emphasis each time you repeat a phrase — notice how the curve shifts.",
+      "Build up the marmalade sentence one word at a time."
+    ],
+    "why": "Intonation — the rise and fall of pitch across a phrase — is a major part of voice character. Practising with simple curves builds the habit of expressive, varied pitch.",
+    "phrases": [
+      "My mummy makes marmalade most Monday mornings",
+      "My mother and Mary went to the matinee",
+      "Millions of men were marching",
+      "The meeting is on Monday morning"
+    ],
+    "pitchPreset": {
+      "targets": ["E3"],
+      "window": 10,
+      "mode": "contour"
+    },
+    "related": ["larynx-height", "pitch-targets"],
+    "source": 2
+  },
+  {
+    "id": "resonance-key",
+    "title": "Resonance: the \"key\" shape",
+    "summary": "Brighten the sound by saying a vowel with the same characteristics as a small, cute 'key'.",
+    "steps": [
+      "Say a relaxed 'oh' — notice it sounds quite dark.",
+      "Say a small, cute 'key' — notice it sounds brighter.",
+      "Remember how 'key' felt and say 'oh' the same way — it should get brighter.",
+      "Repeat with other vowels: 'ah', 'oo', 'ee'.",
+      "Say 'heed', 'heard', 'hard' in sequence and feel resonance move back in the mouth.",
+      "Hold 'ugh' then 'ooo': resonance moves from the stomach to the front of the mouth."
+    ],
+    "why": "This technique changes resonance only — it shouldn't affect your accent. Bright resonance is a key part of a more feminine voice quality, alongside pitch and intonation.",
+    "phrases": [
+      "G'day.",
+      "Hi there.",
+      "I think so.",
+      "See you soon.",
+      "I just got home.",
+      "That one's my favourite.",
+      "I've been thinking about that.",
+      "Yes, that's absolutely fine by me.",
+      "Have you found anything yet?",
+      "What time's best for you?"
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 10,
+      "mode": "resonance"
+    },
+    "related": ["smiletone", "ng-sirens"],
+    "source": 2
+  },
+  {
+    "id": "smiletone",
+    "title": "Smiletone",
+    "summary": "Use a smile to get into bright resonance.",
+    "steps": [
+      "Place a pen lightly between your teeth and breathe normally for a moment.",
+      "Remove the pen and hum a high 'ee' — the pen position opens the mouth helpfully.",
+      "Switch to 'ah' and notice the resonance moving.",
+      "Compare 'ee' with a smile versus without — feel the difference.",
+      "Try speaking a phrase with the same smile quality, without overdoing it."
+    ],
+    "why": "A smile physically raises the cheeks and can help open bright resonance. Useful for getting into the right zone — though you might find you smile a lot at first.",
+    "phrases": [
+      "Mama made me make marmalade most Mondays."
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 20,
+      "mode": "free"
+    },
+    "related": ["resonance-key", "ng-sirens"],
+    "source": 2
+  },
+  {
+    "id": "ng-sirens",
+    "title": "\"ng\" and sirens",
+    "summary": "Slide pitch on an 'ng' sound to explore your range without strain.",
+    "steps": [
+      "Make an 'ng' sound as in 'sing' — feel the vibration.",
+      "Slide high and low on the 'ng' like a siren.",
+      "Try a nee-naw siren pattern.",
+      "Move through 'ng e', 'ng i', 'ng o', 'ng u' in sequence.",
+      "Sustain an extended 'ng eeeee'.",
+      "Chant 'ng eee 1 2 3 4 5' — this is the core exercise.",
+      "Use a smile throughout — this helps open resonance and avoids the false vocal folds."
+    ],
+    "why": "Above the true vocal folds are the false vocal folds, which can compensate and create strain. The 'ng' sound naturally bypasses them. Smiling also helps open resonance and avoid using the false folds as a crutch.",
+    "phrases": [
+      "ng eee 1 2 3 4 5"
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 20,
+      "mode": "sirens"
+    },
+    "related": ["trills-glides", "smiletone"],
+    "source": 2
+  },
+  {
+    "id": "trills-glides",
+    "title": "Trills and glides",
+    "summary": "Loosen things up and move pitch around.",
+    "steps": [
+      "Lip trill: lick your lips and blow a raspberry. Move pitch up and down.",
+      "If lip trills are hard, use a tongue trill instead.",
+      "'Whoop' from your lowest pitch to your highest and back.",
+      "Glide 'woo' up, then down, then in a U shape.",
+      "Notice if pitch 'slots' between steps rather than gliding smoothly — this is normal and improves with practice."
+    ],
+    "why": "Pitch 'slotting' between steps is like partials on a trumpet — the voice finds stable resonance positions. With short, regular practice, the gaps fill in and glides become smooth.",
+    "phrases": [
+      "Woo (up)",
+      "Woo (down)",
+      "Woo (U shape)"
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 20,
+      "mode": "sirens"
+    },
+    "related": ["ng-sirens", "straw-bubbles"],
+    "source": 3
+  },
+  {
+    "id": "straw-bubbles",
+    "title": "Straw and bubble phonation",
+    "summary": "Hum through a straw into water, then carry the same sound into speech.",
+    "steps": [
+      "Fill a cup with about three fingers of water and use a straw. Good lip seal.",
+      "Blow a steady stream of bubbles — no sound first, just breath.",
+      "Add a hum to the bubbles.",
+      "If that's hard, hum through the straw with your finger blocking the end — it should stop the hum.",
+      "Lower the straw into the water and continue the hum.",
+      "Glide the hum up and down in pitch; repeat with chin tilted up.",
+      "Part 1: blow gently, no sound, x5, noticing how open the throat feels.",
+      "Part 2: 'oo' with the straw, gliding low-to-high x10, high-to-low x10, then a siren.",
+      "Part 3: short bursts of 'ooo', removing the straw mid-sound without changing anything, then extending to counting.",
+      "Finish with 'woo', then 'me, my, mo, moo'.",
+      "To generalise: say a sentence; say it into bubbles x3; say it with all skills from the bubbles."
+    ],
+    "why": "Straw phonation creates back-pressure that reduces vocal fold strain and helps the folds find efficient vibration. The goal is to carry that open, easy quality into normal speech.",
+    "phrases": [
+      "Hi, how are you?",
+      "Do you want a cup of tea?",
+      "Can I get a receipt please?",
+      "Where shall we sit?",
+      "I like warm holidays",
+      "My name is [your name]",
+      "Sunlight paragraph (5–7 words at a time)"
+    ],
+    "pitchPreset": {
+      "targets": [],
+      "window": 20,
+      "mode": "contour"
+    },
+    "related": ["trills-glides", "breath-support"],
+    "source": 3
+  },
+  {
+    "id": "yawn-sigh",
+    "title": "Yawn-sigh release",
+    "summary": "Release jaw and tongue tension.",
+    "steps": [
+      "Yawn and sigh, stretching the jaw wide — tongue flat.",
+      "Yawn and sigh again, this time pressing the tongue up into the hard palate.",
+      "Disney princess yawn: exaggerate the elegance.",
+      "Yawn and sigh, then hold the end of the sigh.",
+      "Yawn and sigh gruffly — feel the vibration in the throat and chest."
+    ],
+    "why": "The urge to yawn mid-conversation is a signal that you're holding tension in your tongue. Stretching the tongue relaxes it. These variations explore different parts of the release.",
+    "phrases": [],
+    "pitchPreset": null,
+    "related": ["breath-support"],
+    "source": 3
+  }
+]

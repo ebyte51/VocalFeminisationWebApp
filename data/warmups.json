@@ -1,0 +1,283 @@
+[
+  {
+    "id": "grounding",
+    "category": "grounding",
+    "title": "Grounding",
+    "instructions": "Feet flat on the ground. Take a deep inhale, then a slow exhale. Release tension in your body and shoulders.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": ["always-first"]
+  },
+  {
+    "id": "belly-breathing-sounds",
+    "category": "breath",
+    "title": "Belly breathing sounds",
+    "instructions": "Deep breath, then use all your air on 'shhh' (quietening someone), 'vrrr' (a racing car) or 'brrr' (a bumble bee) — control from the abdomen.",
+    "timerSeconds": null,
+    "reps": 3,
+    "tags": []
+  },
+  {
+    "id": "sigh-out",
+    "category": "breath",
+    "title": "Sigh out",
+    "instructions": "Diaphragmatic breath, sigh out on 'ss', 'ff' and 'sh' for as long as is comfortable.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "voiced-sigh",
+    "category": "breath",
+    "title": "Voiced sigh",
+    "instructions": "Sing out a breath on 'mmm', 'vvv' and 'zzz'.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "shoulder-rolls",
+    "category": "body",
+    "title": "Shoulder rolls",
+    "instructions": "Sit straight. Five big rolls, forwards or backwards.",
+    "timerSeconds": null,
+    "reps": 5,
+    "tags": ["cooldown"]
+  },
+  {
+    "id": "side-head-lean",
+    "category": "body",
+    "title": "Side head lean",
+    "instructions": "Lean your head toward one shoulder, then the other.",
+    "timerSeconds": 5,
+    "reps": 3,
+    "tags": []
+  },
+  {
+    "id": "chin-tuck-lift",
+    "category": "body",
+    "title": "Chin tuck and lift",
+    "instructions": "Chin to chest; then chin up with the back of the head toward the shoulders.",
+    "timerSeconds": 5,
+    "reps": 3,
+    "tags": []
+  },
+  {
+    "id": "shoulders-to-ears",
+    "category": "body",
+    "title": "Shoulders to ears",
+    "instructions": "Lift your shoulders up to your ears and hold.",
+    "timerSeconds": 5,
+    "reps": 2,
+    "tags": []
+  },
+  {
+    "id": "side-stretch",
+    "category": "body",
+    "title": "Side stretch",
+    "instructions": "Stretch one arm over the head to open the ribs. Both sides.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "cheek-massage",
+    "category": "face",
+    "title": "Cheek massage",
+    "instructions": "Heel of hand, circular motion in the dimples of the cheeks, massaging toward the lips.",
+    "timerSeconds": 25,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "jaw-massage",
+    "category": "face",
+    "title": "Jaw massage",
+    "instructions": "Fingers where the jaw meets near the ears. Circular motion.",
+    "timerSeconds": 25,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "tongue-stretch",
+    "category": "face",
+    "title": "Tongue stretch",
+    "instructions": "Stretch the tongue toward the chin as far as comfortable.",
+    "timerSeconds": 5,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "tongue-figure-8",
+    "category": "face",
+    "title": "Tongue figure 8",
+    "instructions": "Draw figure 8s or infinity signs with the tongue inside the mouth.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "fist-squeeze",
+    "category": "face",
+    "title": "Fist squeeze",
+    "instructions": "Squeeze fingers into a tight fist, hold, release and feel the tension release. Repeat with toes.",
+    "timerSeconds": 5,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "face-scrunch",
+    "category": "face",
+    "title": "Face scrunch",
+    "instructions": "Scrunch the whole face, then release.",
+    "timerSeconds": 5,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "princess-sigh",
+    "category": "vocal",
+    "title": "Princess sigh",
+    "instructions": "A high-pitched sigh, as if a princess whose animals have done all her jobs for her.",
+    "timerSeconds": null,
+    "reps": 3,
+    "tags": []
+  },
+  {
+    "id": "ng-siren",
+    "category": "vocal",
+    "title": "\"ng\" siren",
+    "instructions": "Make an 'ng' as in 'sing', slide between high and low like a siren. Smile to help open resonance.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "nee-naw-siren",
+    "category": "vocal",
+    "title": "Nee-naw siren",
+    "instructions": "The same 'ng' sound in a nee-naw siren pattern.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "lip-tongue-trill",
+    "category": "vocal",
+    "title": "Lip or tongue trill",
+    "instructions": "Lick lips and blow a raspberry. If you can't do a lip trill, use a tongue trill. Move the pitch around.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "whoop",
+    "category": "vocal",
+    "title": "Whoop",
+    "instructions": "A 'whoop' from your lowest pitch to your highest, and back.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "yawn-sigh-flat",
+    "category": "vocal",
+    "title": "Yawn-sigh (tongue flat)",
+    "instructions": "Yawn and sigh, stretching the jaw wide. Keep the tongue flat.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": ["cooldown"],
+    "tip": "The urge to yawn while talking is a sign you're holding tongue tension — stretching relaxes it."
+  },
+  {
+    "id": "yawn-sigh-up",
+    "category": "vocal",
+    "title": "Yawn-sigh (tongue up)",
+    "instructions": "Yawn and sigh, pressing the tongue up into the hard palate.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "disney-princess-yawn",
+    "category": "vocal",
+    "title": "Disney princess yawn",
+    "instructions": "Yawn like a Disney princess — exaggerate the elegance.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": ["cooldown"]
+  },
+  {
+    "id": "held-sigh",
+    "category": "vocal",
+    "title": "Held sigh",
+    "instructions": "Yawn and sigh, then hold the end of the sigh.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "gruff-yawn-sigh",
+    "category": "vocal",
+    "title": "Gruff yawn-sigh",
+    "instructions": "Yawn and sigh gruffly, so you feel it in your throat and chest.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "foghorn",
+    "category": "vocal",
+    "title": "Foghorn",
+    "instructions": "Deep diaphragmatic breath. Purse lips into an 'o' and sustain a foghorn-like 'ooo'. Then a breathier 'ooo'. Then push from the diaphragm for a louder 'ooo'.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": [],
+    "tip": "When you notice you're speaking more quietly, check your diaphragmatic breathing and air support."
+  },
+  {
+    "id": "siren-ng",
+    "category": "vocal",
+    "title": "Siren with 'ng'",
+    "instructions": "Make an 'ng' sound and slide pitch while keeping the sound continuous.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": []
+  },
+  {
+    "id": "woo-up",
+    "category": "cooldown",
+    "title": "Woo (up)",
+    "instructions": "Glide a 'woo' upward a few times.",
+    "timerSeconds": null,
+    "reps": 3,
+    "tags": ["cooldown"]
+  },
+  {
+    "id": "woo-down",
+    "category": "cooldown",
+    "title": "Woo (down)",
+    "instructions": "Glide a 'woo' downward a few times.",
+    "timerSeconds": null,
+    "reps": 3,
+    "tags": ["cooldown"]
+  },
+  {
+    "id": "woo-u-shape",
+    "category": "cooldown",
+    "title": "Woo (U shape)",
+    "instructions": "Glide a 'woo' in a U shape (down then up) a few times.",
+    "timerSeconds": null,
+    "reps": 3,
+    "tags": ["cooldown"]
+  },
+  {
+    "id": "few-yawns",
+    "category": "cooldown",
+    "title": "A few yawns",
+    "instructions": "Let yourself yawn a few times — real or fake. Feel the jaw open and the throat relax.",
+    "timerSeconds": null,
+    "reps": null,
+    "tags": ["cooldown"]
+  }
+]
