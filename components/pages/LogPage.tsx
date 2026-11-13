@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getSessions, saveSession } from "@/lib/db";
 import techniquesData from "@/data/techniques.json";
 import type { Session, Technique, Feeling } from "@/lib/types";
+import PageHeader from "@/components/PageHeader";
 
 const techniques = techniquesData as Technique[];
 
@@ -20,17 +21,22 @@ export default function LogPage() {
 
   if (sessions.length === 0) {
     return (
-      <div className="px-4 py-6">
-        <h1 className="text-2xl font-bold text-navy dark:text-white mb-2">Practice log</h1>
-        <p className="text-sm text-gray-500 dark:text-gray-400">
-          Sessions you save will appear here. After a recording session, you'll be prompted to log how it went.
-        </p>
+      <div className="py-2 pb-6">
+        <PageHeader backHref="/more" backLabel="More" showHome />
+        <div className="px-4 mt-2">
+          <h1 className="text-2xl font-bold text-navy dark:text-white mb-2">Practice log</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Sessions you save will appear here. After a recording session, you'll be prompted to log how it went.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="px-4 py-6 space-y-6">
+    <div className="py-2 pb-6 space-y-4">
+      <PageHeader backHref="/more" backLabel="More" showHome />
+      <div className="px-4 space-y-6">
       <h1 className="text-2xl font-bold text-navy dark:text-white">Practice log</h1>
 
       {/* Summary */}
@@ -53,6 +59,7 @@ export default function LogPage() {
             setSessions((prev) => prev.map((x) => x.id === s.id ? s : x));
           }} />
         ))}
+      </div>
       </div>
     </div>
   );

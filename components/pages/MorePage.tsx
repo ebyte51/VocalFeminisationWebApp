@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
 
 const MORE_ITEMS = [
   { href: "/foundations", icon: "📚", label: "Foundations", description: "Voice care and core concepts" },
@@ -10,7 +11,9 @@ const MORE_ITEMS = [
 
 export default function MorePage() {
   return (
-    <div className="px-4 py-6">
+    <div className="py-2 pb-6">
+      <PageHeader backHref="/" backLabel="Home" />
+      <div className="px-4">
       <h1 className="text-2xl font-bold text-navy dark:text-white mb-6">More</h1>
       <div className="space-y-2">
         {MORE_ITEMS.map((item) => (
@@ -31,10 +34,11 @@ export default function MorePage() {
         ))}
       </div>
 
-      <div className="mt-8 bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-xs text-gray-500 dark:text-gray-400 space-y-1">
-        <p className="font-medium text-navy dark:text-white">About Voice Trainer</p>
+      <div className="mt-8 bg-gray-100 dark:bg-gray-800 rounded-xl p-4 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+        <p className="font-semibold text-navy dark:text-white">About Voice Trainer</p>
         <p>A personal voice training companion based on vocal feminisation sessions 1–3.</p>
         <p>All audio is processed on your device. Nothing is uploaded.</p>
+      </div>
       </div>
     </div>
   );

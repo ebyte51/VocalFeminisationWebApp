@@ -3,8 +3,9 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { saveProfile } from "@/lib/db";
 import { PitchReader } from "@/lib/audio";
-import { midiToHz, hzToMidi } from "@/lib/types";
+import { midiToHz } from "@/lib/types";
 import type { CalibrationProfile, ResonanceAnchors } from "@/lib/types";
+import PageHeader from "@/components/PageHeader";
 
 const STEPS = [
   {
@@ -117,15 +118,8 @@ export default function CalibratePage() {
   const currentStep = STEPS[step];
 
   return (
-    <div className="min-h-screen flex flex-col px-4 py-6 bg-white dark:bg-navy">
-      {/* Back */}
-      <button onClick={() => router.back()} className="flex items-center gap-1 text-sm text-flag-blue mb-4 touch-target -ml-1">
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-        Back
-      </button>
-
+    <div className="min-h-screen flex flex-col px-4 py-2 bg-white dark:bg-navy">
+      <PageHeader backHref="/techniques" backLabel="Techniques" showHome />
       <h1 className="text-2xl font-bold text-navy dark:text-white mb-1">Resonance calibration</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
         Step {step + 1} of {STEPS.length}
