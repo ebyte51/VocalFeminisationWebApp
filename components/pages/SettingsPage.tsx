@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useSettingsStore } from "@/lib/store";
 import { deleteAllRecordings } from "@/lib/db";
 import Toggle from "@/components/Toggle";
+import PageHeader from "@/components/PageHeader";
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -24,7 +25,9 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="px-4 py-6 space-y-6">
+    <div className="py-2 space-y-6 pb-6">
+      <PageHeader backHref="/more" backLabel="More" showHome />
+      <div className="px-4 space-y-6">
       <h1 className="text-2xl font-bold text-navy dark:text-white">Settings</h1>
 
       {/* Pitch Reader */}
@@ -150,6 +153,7 @@ export default function SettingsPage() {
       <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
         All data is stored on your device. Nothing is uploaded.
       </p>
+      </div>
     </div>
   );
 }

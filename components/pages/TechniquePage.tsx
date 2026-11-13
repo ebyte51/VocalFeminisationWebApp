@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import techniquesData from "@/data/techniques.json";
 import type { Technique } from "@/lib/types";
 import { setLastTechnique, getCustomPhrases, saveCustomPhrases, type CustomPhrase } from "@/lib/store";
+import PageHeader from "@/components/PageHeader";
 
 const techniques = techniquesData as Technique[];
 
@@ -83,16 +84,10 @@ export default function TechniquePage({ id }: { id: string }) {
 
   return (
     <div className="px-4 py-6 pb-8">
-      {/* Back */}
-      <Link href="/techniques" className="flex items-center gap-1 text-sm text-flag-blue mb-4 touch-target -ml-1">
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-        Techniques
-      </Link>
+      <PageHeader backHref="/techniques" backLabel="Techniques" showHome />
 
       {/* Title */}
-      <h1 className="text-2xl font-bold text-navy dark:text-white mb-1">{tech.title}</h1>
+      <h1 className="text-2xl font-bold text-navy dark:text-white mb-1 mt-2">{tech.title}</h1>
       <p className="text-sm text-gray-600 dark:text-gray-300 mb-5">{tech.summary}</p>
 
       {/* Open in Pitch Reader */}

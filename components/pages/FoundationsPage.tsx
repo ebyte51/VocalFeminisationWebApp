@@ -1,8 +1,11 @@
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
 
 export default function FoundationsPage() {
   return (
-    <div className="px-4 py-6 space-y-6">
+    <div className="py-2 space-y-6">
+      <PageHeader backHref="/more" backLabel="More" showHome />
+      <div className="px-4 space-y-6">
       <h1 className="text-2xl font-bold text-navy dark:text-white">Foundations</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400">
         The core concepts and voice care advice from your sessions.
@@ -98,6 +101,7 @@ export default function FoundationsPage() {
           Techniques
         </Link>
       </div>
+    </div>
     </div>
   );
 }
